@@ -15,5 +15,12 @@ namespace TrainSimulationApp
             this.IsOccupied = false;
             this.CurrentTrain = null;
         }
+
+        public void AssignTrainToPlatform(Train train)
+        {
+            CurrentTrain = train;
+            IsOccupied = true;
+        }
     }
+
 }

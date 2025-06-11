@@ -32,9 +32,9 @@ namespace TrainSimulationApp
                 Console.WriteLine("2. Start simulation");
                 Console.WriteLine("3. Display system state");
                 Console.WriteLine("4. Exit");
+                Console.WriteLine("-----------------------\n");              
                 Console.Write("Choose an option: ");
                 string? choice = Console.ReadLine(); 
-                Console.WriteLine("\n-----------------------");              
             }
         }
     }

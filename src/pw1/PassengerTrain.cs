@@ -2,22 +2,26 @@ using System;
 
 namespace TrainSimulationApp
 {
-    class FreightTrain : Train
+
+    class PassengerTrain : Train
     {
-        public int MaxWeight { get; set; }
-        public string? FreightType { get; set; }
+        public int NumberofCarriages { get; set; }
+        public int Capacity { get; set; }
+
+        public PassengerTrain(string ID, int ArrivalTime, string Type, int NumberofCarriages, int Capacity) : base(ID, ArrivalTime, Type) //base allows reuse and extend the class functionality
+        {
+            this.NumberofCarriages = NumberofCarriages;
+            this.Capacity = Capacity;
+        }
+
+        public override void DisplayInfo() //it does not take arguments because it directly uses the internal properties
+        {
+            base.DisplayInfo();
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine($"  -Number of Carriages: {NumberofCarriages}");
+            Console.WriteLine($"  -Capacity: {Capacity} passengers");
+            Console.WriteLine("---------------------------------");
+        }
     }
-    public FreightTrain(string ID, int ArrivalTime, string Type, int maxWeight, string freightType): base(ID, ArrivalTime, Type)
-    {
-        MaxWeight = maxWeight;
-        FreightType = freightType;
-    }
-    public override void DisplayInfo() //it does not take arguments because it directly uses the internal properties
-    {
-        base.DisplayInfo();
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine($"  -Max weight: {MaxWeight} tons");
-        Console.WriteLine($"  -Freight type: {FreightType}");
-        Console.WriteLine("---------------------------------");
-    }
+
 }

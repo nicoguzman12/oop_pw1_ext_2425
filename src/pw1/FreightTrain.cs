@@ -8,10 +8,10 @@ namespace TrainSimulationApp
         public int NumberofCarriages { get; set; }
         public int Capacity { get; set; }
 
-        public PassengerTrain(string ID, int ArrivalTime, string Type, int NumberofCarriages, int Capacity) : base(ID, ArrivalTime, Type)
+        public PassengerTrain(string ID, int ArrivalTime, string Type, int NumberofCarriages, int Capacity) : base(ID, ArrivalTime, Type) //base allows reuse and extend the class functionality
         {
             this.NumberofCarriages = NumberofCarriages;
-            this.Capacity = Capacity;
+            this.Capacity = Capacity; 
         }
     }
 

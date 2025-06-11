@@ -51,7 +51,7 @@ namespace TrainSimulationApp
             {
                 if (train.Status == TrainStatus.OnRoute)
                 {
-                    train.ArrivalTime -= 15;
+                    train.AdvanceTick();
                     if (train.ArrivalTime <= 0)
                     {
                         bool assigned = AssignTrainToPlatform(train);
@@ -63,7 +63,6 @@ namespace TrainSimulationApp
                 }
             }
         }
-
         public void ReleaseArrivedTrains()
         {
             foreach (var platform in Platforms)

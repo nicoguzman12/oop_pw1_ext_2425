@@ -1,0 +1,16 @@
+ID,ArrivalTime,Type,AdditionalData1,AdditionalData2
+P001,120,Passenger,5,200
+M001,45,Freight,15000,Containers
+P002,90,Passenger,6,180
+M002,30,Freight,20000,Tech
+P003,60,Passenger,4,100
+M003,75,Freight,18000,Cars
+P004,105,Passenger,7,220
+M004,150,Freight,25000,Clothes
+P005,135,Passenger,5,150
+M005,15,Freight,10000,Wood
+P006,60,Passenger,3,80
+M006,90,Freight,12000,Water
+P007,30,Passenger,6,160
+M007,105,Freight,22000,Oil
+P008,45,Passenger,5,110

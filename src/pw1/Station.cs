@@ -45,6 +45,25 @@ namespace TrainSimulationApp
             return false;
         }
 
+        public void AdvanceTick()
+        {
+            foreach (var train in Trains)
+            {
+                if (train.Status == TrainStatus.OnRoute)
+                {
+                    train.ArrivalTime -= 15;
+                    if (train.ArrivalTime <= 0)
+                    {
+                        bool assigned = AssignTrainToPlatform(train);
+                        if (assigned == false)
+                        {
+                            train.Status = TrainStatus.Waiting;
+                        }
+                    }
+                }
+            }
+        }
+
         public void ReleaseArrivedTrains()
         {
             foreach (var platform in Platforms)

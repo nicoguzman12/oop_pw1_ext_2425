@@ -37,7 +37,7 @@ namespace TrainSimulationApp
                 Console.Write("Choose an option: ");
 
                 string? choice = Console.ReadLine();
-
+                
                 switch (choice)
                 {
                     case "1":
@@ -49,10 +49,31 @@ namespace TrainSimulationApp
                             station.LoadTrains(trains);
                             Console.WriteLine("Trains were loaded succesfully!!");
                         }
+                        else
+                        {
+                            Console.WriteLine("Invalid File Path");
+                        }
                         break;
+
                     case "2":
-                        //station.StartSimulation();
+                        if (station.Trains.Count == 0)
+                        {
+                            Console.WriteLine("No trains loaded. Please load a CSV file first.");
+                        }
+                        else
+                        {
+                            station.StartSimulation();
+                        }
                         break;
+
+                    case "3":
+                        station.DisplayPlatformStatus();
+                        break;
+
+                    case "4":
+                        Console.WriteLine("Exiting the program...");
+                        return; 
+
                 }
             }
 

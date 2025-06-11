@@ -22,7 +22,7 @@ namespace TrainSimulationApp
         {
             foreach (var platform in Platforms)
             {
-                if (!platform.IsOccupied)
+                if(!platform.IsOccupied)
                 {
                     platform.AssignTrainToPlatform(train);
                     train.Status = TrainStatus.Docked;
@@ -33,6 +33,23 @@ namespace TrainSimulationApp
             // if there are not availible platforms
             train.Status = TrainStatus.Waiting;
             return false;
+        }
+
+        public void ReleaseArrivedTrains()
+        {
+            foreach (var platform in Platforms)
+            {
+                if (platform.IsOccupied && platform.CurrentTrain != null)
+                {
+                    Train train = platform.CurrentTrain;
+
+                    if (train.ArrivalTime == 0 && (train.Status == TrainStatus.Docking || train.Status == TrainStatus.Docked))
+                    {
+                        train.Status = TrainStatus.Docked;
+                        platform.ReleasePlatform();
+                    }
+                }
+            }
         }
     }
 }

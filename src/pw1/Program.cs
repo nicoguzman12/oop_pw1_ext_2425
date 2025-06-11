@@ -35,11 +35,30 @@ namespace TrainSimulationApp
                 Console.WriteLine("4. Exit");
                 Console.WriteLine("-----------------------\n");
                 Console.Write("Choose an option: ");
+
                 string? choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        Console.Write("Enter CSV file path: ");
+                        string? filePath = Console.ReadLine();
+                        if (filePath != null)
+                        {
+                            var trains = ReadTrainsFromCsv(filePath);
+                            station.LoadTrains(trains);
+                            Console.WriteLine("Trains were loaded succesfully!!");
+                        }
+                        break;
+                    case "2":
+                        //station.StartSimulation();
+                        break;
+                }
             }
+
         }
 
-        public static List<Train> ReadTrainsFromScv(string filePath)
+        public static List<Train> ReadTrainsFromCsv(string filePath)
         {
             var trains = new List<Train>();
 

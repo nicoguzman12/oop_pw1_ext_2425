@@ -37,43 +37,50 @@ namespace TrainSimulationApp
                 Console.Write("Choose an option: ");
 
                 string? choice = Console.ReadLine();
-                
-                switch (choice)
+
+                if (choice != "1" && choice != "2" && choice != "3" && choice != "4")
                 {
-                    case "1":
-                        Console.Write("Enter CSV file path: ");
-                        string? filePath = Console.ReadLine();
-                        if (filePath != null)
-                        {
-                            var trains = ReadTrainsFromCsv(filePath);
-                            station.LoadTrains(trains);
-                            Console.WriteLine("Trains were loaded succesfully!!");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid File Path");
-                        }
-                        break;
+                    Console.WriteLine("Invalid option chosen, please select one from the menu.");
+                }
+                else
+                {
+                    switch (choice)
+                    {
+                        case "1":
+                            Console.Write("Enter CSV file path: ");
+                            string? filePath = Console.ReadLine();
+                            if (filePath != null)
+                            {
+                                var trains = ReadTrainsFromCsv(filePath);
+                                station.LoadTrains(trains);
+                                Console.WriteLine("Trains were loaded succesfully!!");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid File Path");
+                            }
+                            break;
 
-                    case "2":
-                        if (station.Trains.Count == 0)
-                        {
-                            Console.WriteLine("No trains loaded. Please load a CSV file first.");
-                        }
-                        else
-                        {
-                            station.StartSimulation();
-                        }
-                        break;
+                        case "2":
+                            if (station.Trains.Count == 0)
+                            {
+                                Console.WriteLine("No trains loaded. Please load a CSV file first.");
+                            }
+                            else
+                            {
+                                station.StartSimulation();
+                            }
+                            break;
 
-                    case "3":
-                        station.DisplayPlatformStatus();
-                        break;
+                        case "3":
+                            station.DisplayPlatformStatus();
+                            break;
 
-                    case "4":
-                        Console.WriteLine("Exiting the program...");
-                        return; 
+                        case "4":
+                            Console.WriteLine("Exiting the program...");
+                            return;
 
+                    }
                 }
             }
 

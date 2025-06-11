@@ -34,6 +34,7 @@ namespace TrainSimulationApp
         {
             CurrentTrain = null;
             IsOccupied = false;
+            DockingTicksRemaining = 0;
         }
     }
 

@@ -17,5 +17,22 @@ namespace TrainSimulationApp
                 Platforms.Add(new Platform(i));
             }
         }
+
+        public bool AssignTrainToPlatform(Train train)
+        {
+            foreach (var platform in Platforms)
+            {
+                if (!platform.IsOccupied)
+                {
+                    platform.AssignTrainToPlatform(train);
+                    train.Status = TrainStatus.Docked;
+                    return true;
+                }
+            }
+
+            // if there are not availible platforms
+            train.Status = TrainStatus.Waiting;
+            return false;
+        }
     }
 }

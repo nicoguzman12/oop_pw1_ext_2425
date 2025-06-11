@@ -29,7 +29,7 @@ namespace TrainSimulationApp
             }
         }
 
-        public virtual void DisplayInfo(string ID, int ArrivalTime, string Type)
+        public virtual void DisplayInfo()
         {
             Console.WriteLine("------- Train Information -------");
             Console.WriteLine($"  -ID: {ID}");

@@ -21,6 +21,12 @@ namespace TrainSimulationApp
             CurrentTrain = train;
             IsOccupied = true;
         }
+
+        public void ReleasePlatform()
+        {
+            CurrentTrain = null;
+            IsOccupied = false;
+        }
     }
 
 }

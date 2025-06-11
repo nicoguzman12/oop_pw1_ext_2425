@@ -99,5 +99,35 @@ namespace TrainSimulationApp
                 }
             }
         }
+
+        public void StartSimulation()
+        {
+            int tick = 0;
+
+            Console.WriteLine("\n------Simulation started------");
+
+            foreach (var train in Trains)
+            {
+                train.Status = TrainStatus.OnRoute;
+            }
+
+            while (Trains.Any(t => t.Status != TrainStatus.Docked))
+            {
+                Console.WriteLine($"\n>>> Tick {tick}");
+
+                AdvanceTick();
+                ReleaseArrivedTrains();
+                DisplayPlatformStatus();
+
+                Console.WriteLine("Press Enter to continue to the next tick...");
+                Console.ReadLine();
+                tick++;
+            }
+
+            Console.WriteLine(" --------------------------------------");
+            Console.WriteLine("\n ----All trains have been docked-----");
+            Console.WriteLine("\n --------SIMULATION COMPLETED--------");
+            Console.WriteLine(" --------------------------------------");
+        }
     }
 }

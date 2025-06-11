@@ -4,9 +4,9 @@ namespace TrainSimulationApp
 {
     abstract class Train
     {
-        string ID { get; set; }
-        int ArrivalTime { get; set; }
-        string Type { get; set; }
+        public string ID { get; set; }
+        public int ArrivalTime { get; set; }
+        public string Type { get; set; }
         public TrainStatus Status { get; set; }
         public Train(string ID, int ArrivalTime, string Type)
         {
@@ -14,8 +14,18 @@ namespace TrainSimulationApp
             this.ArrivalTime = ArrivalTime;
             this.Type = Type;
             this.Status = TrainStatus.OnRoute; //by logic I initialize it on the way to the station
+        }
 
-
+        public virtual void AdvanceTick()
+        {
+            if (ArrivalTime >= 15)
+            {
+                ArrivalTime -= 15;
+            }
+            else
+            {
+                ArrivalTime = 0;
+            }
         }
     }
 }

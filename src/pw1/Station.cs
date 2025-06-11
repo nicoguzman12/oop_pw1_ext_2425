@@ -19,6 +19,13 @@ namespace TrainSimulationApp
                 Platforms.Add(new Platform(i));
             }
         }
+        public void LoadTrains(List<Train> trainsFromFile)
+        {
+            foreach (var train in trainsFromFile)
+            {
+                Trains.Add(train);
+            }
+        }
 
         public bool AssignTrainToPlatform(Train train)
         {
@@ -27,7 +34,8 @@ namespace TrainSimulationApp
                 if (!platform.IsOccupied)
                 {
                     platform.AssignTrainToPlatform(train);
-                    train.Status = TrainStatus.Docked;
+                    train.Status = TrainStatus.Docking;
+                    platform.DockingTicksRemaining = 2;
                     return true;
                 }
             }

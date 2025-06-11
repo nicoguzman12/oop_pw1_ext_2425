@@ -6,11 +6,13 @@ namespace TrainSimulationApp
     {
         public string Name { get; set; }
         public List<Platform> Platforms { get; set; }
+        public List<Train> Trains { get; set; }
 
         public Station(string name, int numberOfPlatforms)
         {
             this.Name = name;
             Platforms = new List<Platform>();
+            Trains = new List<Train>();
 
             for (int i = 1; i <= numberOfPlatforms; i++)
             {

@@ -7,6 +7,7 @@ namespace TrainSimulationApp
         public int PlatformNumber { get; set; }
         public bool IsOccupied { get; set; }
         public Train? CurrentTrain { get; set; }
+        public int DockingTicksRemaining { get; set; }
 
 
         public Platform(int platformNumber)
@@ -14,6 +15,7 @@ namespace TrainSimulationApp
             this.PlatformNumber = platformNumber;
             this.IsOccupied = false;
             this.CurrentTrain = null;
+            this.DockingTicksRemaining = 0;
         }
 
         public bool AssignTrainToPlatform(Train train)

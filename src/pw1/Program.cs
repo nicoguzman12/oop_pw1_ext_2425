@@ -20,8 +20,10 @@ namespace TrainSimulationApp
                 else
                 {
                     Console.WriteLine("Invalid number. Please enter a valid positive integer.");
-                }          
+                }
             }
+
+            Station station = new Station(numberOfPlatforms);
         }
     }
 }

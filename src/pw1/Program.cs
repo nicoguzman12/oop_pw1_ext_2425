@@ -23,7 +23,7 @@ namespace TrainSimulationApp
                 }
             }
 
-            Station station = new Station(numberOfPlatforms);
+            Station station = new Station("UFV Station", numberOfPlatforms);
 
             while (true)
             {

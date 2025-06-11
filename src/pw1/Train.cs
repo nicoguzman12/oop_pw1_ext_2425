@@ -2,7 +2,7 @@ using System;
 
 namespace TrainSimulationApp
 {
-    abstract class Train
+    public abstract class Train
     {
         public string ID { get; set; }
         public int ArrivalTime { get; set; }

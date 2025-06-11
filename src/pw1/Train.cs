@@ -8,6 +8,7 @@ namespace TrainSimulationApp
         public int ArrivalTime { get; set; }
         public string Type { get; set; }
         public TrainStatus Status { get; set; }
+
         public Train(string ID, int ArrivalTime, string Type)
         {
             this.ID = ID;
@@ -26,6 +27,16 @@ namespace TrainSimulationApp
             {
                 ArrivalTime = 0;
             }
+        }
+
+        public virtual void DisplayInfo(string ID, int ArrivalTime, string Type)
+        {
+            Console.WriteLine("------- Train Information -------");
+            Console.WriteLine($"  -ID: {ID}");
+            Console.WriteLine($"  -Type: {Type}");
+            Console.WriteLine($"  -Remaining Arrival Time: {ArrivalTime} minutes");
+            Console.WriteLine($"  -Status: {Status}");
+            Console.WriteLine("---------------------------------");
         }
     }
 }

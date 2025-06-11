@@ -47,8 +47,8 @@ namespace TrainSimulationApp
                     switch (choice)
                     {
                         case "1":
-                            Console.Write("Enter CSV file path: ");
-                            string? filePath = Console.ReadLine();
+                            Console.WriteLine("Loading trains from data/Trains.csv");
+                            string filePath = Path.Combine("data", "Trains.csv");
                             if (filePath != null)
                             {
                                 var trains = ReadTrainsFromCsv(filePath);

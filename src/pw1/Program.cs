@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
+
 
 namespace TrainSimulationApp
 {
@@ -24,7 +26,7 @@ namespace TrainSimulationApp
                 }
             }
 
-            Station station = new Station("UFV Station", numberOfPlatforms);
+            Station station = new Station(numberOfPlatforms);
 
             while (true)
             {

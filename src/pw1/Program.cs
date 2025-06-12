@@ -48,7 +48,7 @@ namespace TrainSimulationApp
                     {
                         case "1":
                             Console.WriteLine("Loading trains from data/Trains.csv");
-                            string filePath = Path.Combine("data", "Trains.csv");
+                            string filePath = Path.Combine("..", "..", "..", "..", "..", "data", "Trains.csv");
                             if (filePath != null)
                             {
                                 var trains = ReadTrainsFromCsv(filePath);

@@ -73,7 +73,7 @@ namespace TrainSimulationApp
                             break;
 
                         case "3":
-                            station.DisplayPlatformStatus();
+                            station.DisplayStatus();
                             break;
 
                         case "4":

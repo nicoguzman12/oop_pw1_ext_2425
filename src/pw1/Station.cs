@@ -84,22 +84,19 @@ namespace TrainSimulationApp
             }
         }
 
-        public void DisplayPlatformStatus()
+        public void DisplayStatus()
         {
-            foreach (var platform in Platforms)
-            {
-                Console.WriteLine($"Platform {platform.PlatformNumber}");
+            Console.WriteLine("\n---- Trains ----");
+            foreach (var t in Trains)
+                t.DisplayInfo();
 
-                if (platform.IsOccupied && platform.CurrentTrain != null)
-                {
-                    Console.WriteLine($" -Occupied by Train {platform.CurrentTrain.ID}");
-                    Console.WriteLine($" -Type: {platform.CurrentTrain.Type}");
-                    Console.WriteLine($" -Status: {platform.CurrentTrain.Status}");
-                }
+            Console.WriteLine("\n---- Platforms ----");
+            foreach (var p in Platforms)
+            {
+                if (p.IsOccupied)
+                    Console.WriteLine($"Platform {p.PlatformNumber}: Occupied by {p.CurrentTrain!.ID}, Docking ticks left {p.DockingTicksRemaining}");
                 else
-                {
-                    Console.WriteLine($" -Free");
-                }
+                    Console.WriteLine($"Platform {p.PlatformNumber}: Free");
             }
         }
 
@@ -120,7 +117,7 @@ namespace TrainSimulationApp
 
                 AdvanceTick();
                 ReleaseArrivedTrains();
-                DisplayPlatformStatus();
+                DisplayStatus();
 
                 Console.WriteLine("Press Enter to continue to the next tick...");
                 Console.ReadLine();

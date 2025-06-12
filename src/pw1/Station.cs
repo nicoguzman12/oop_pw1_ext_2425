@@ -36,13 +36,9 @@ namespace TrainSimulationApp
                 {
                     platform.AssignTrainToPlatform(train);
                     train.Status = TrainStatus.Docking;
-                    platform.DockingTicksRemaining = 2;
                     return true;
                 }
             }
-
-            // if there are not availible platforms
-            train.Status = TrainStatus.Waiting;
             return false;
         }
 

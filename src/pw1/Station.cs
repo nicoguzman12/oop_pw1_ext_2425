@@ -72,6 +72,7 @@ namespace TrainSimulationApp
                     if (platform.DockingTicksRemaining == 0 && platform.CurrentTrain != null)
                     {
                         platform.CurrentTrain.Status = TrainStatus.Docked;
+                        platform.ReleasePlatform();
                     }
                 }
             }
@@ -123,7 +124,7 @@ namespace TrainSimulationApp
                 DisplayStatus();
 
                 allDocked = true;
-                
+
                 foreach (var train in Trains)
                 {
                     if (train.Status != TrainStatus.Docked)

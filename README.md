@@ -8,9 +8,9 @@
 1. [Introduction](#introduction)
 2. [Description](#description)
 
-   * [Architecture Overview](#architecture-overview)
+   * [Program structure](#Program-structure)
    * [Class Diagram](#class-diagram)
-   * [Key Methods and Flows](#key-methods-and-flows)
+   * [Key Methods](#key-methods)
 3. [Problems Encountered](#problems-encountered)
 4. [Conclusions](#conclusions)
 

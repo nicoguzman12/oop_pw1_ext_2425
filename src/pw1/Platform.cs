@@ -4,38 +4,48 @@ namespace TrainSimulationApp
 {
     public class Platform
     {
-        public int PlatformNumber { get; set; }
-        public bool IsOccupied { get; set; }
-        public Train? CurrentTrain { get; set; }
+        public int PlatformNumber { get; }
+        public Train? CurrentTrain { get; private set; }
         public int DockingTicksRemaining { get; set; }
 
+        public bool IsOccupied => CurrentTrain != null;
 
         public Platform(int platformNumber)
         {
-            this.PlatformNumber = platformNumber;
-            this.IsOccupied = false;
-            this.CurrentTrain = null;
-            this.DockingTicksRemaining = 0;
+            PlatformNumber = platformNumber;
+            CurrentTrain = null;
+            DockingTicksRemaining = 0;
         }
 
         public bool AssignTrainToPlatform(Train train)
         {
             if (IsOccupied)
             {
-                Console.WriteLine("Platform is actually occupied");
+                Console.WriteLine($"Platform {PlatformNumber} is already occupied.");
                 return false;
             }
-                CurrentTrain = train;
-                IsOccupied = true;
-                return true;
+
+            CurrentTrain = train;
+            return true;
         }
 
         public void ReleasePlatform()
         {
             CurrentTrain = null;
-            IsOccupied = false;
             DockingTicksRemaining = 0;
         }
-    }
 
+        public override string ToString()
+        {
+            if (IsOccupied && CurrentTrain != null)
+            {
+                return $"Platform {PlatformNumber}: Occupied by {CurrentTrain.ID}, " +
+                       $"ticks left: {DockingTicksRemaining}";
+            }
+            else
+            {
+                return $"Platform {PlatformNumber}: Free";
+            }
+        }
+    }
 }

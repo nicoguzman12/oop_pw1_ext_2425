@@ -48,22 +48,29 @@ namespace TrainSimulationApp
 
         public void AdvanceTick()
         {
-            foreach (var train in Trains)
+
+            foreach (var train in Trains)    //reduce arrival time 
             {
-                if (train.Status == TrainStatus.OnRoute)
+                train.AdvanceTick();
+            }
+
+            foreach (var train in Trains.Where(t => t.Status == TrainStatus.OnRoute && t.ArrivalTime == 0)) //try to assign
                 {
-                    train.AdvanceTick();
-                    if (train.ArrivalTime <= 0)
-                    {
-                        bool assigned = AssignTrainToPlatform(train);
-                        if (assigned == false)
-                        {
-                            train.Status = TrainStatus.Waiting;
-                        }
-                    }
+                    bool ok = AssignTrainToPlatform(train);
+                    if (!ok) train.Status = TrainStatus.Waiting;
+                }
+            foreach (var platform in Platforms.Where(p => p.IsOccupied)) //manage docking in platforms
+            {
+                if (platform.DockingTicksRemaining > 0)
+                {
+                    platform.DockingTicksRemaining--;
+                    platform.CurrentTrain!.Status = TrainStatus.Docking;
+                    if (platform.DockingTicksRemaining == 0)
+                        platform.CurrentTrain.Status = TrainStatus.Docked;
                 }
             }
         }
+
         public void ReleaseArrivedTrains()
         {
             foreach (var platform in Platforms)

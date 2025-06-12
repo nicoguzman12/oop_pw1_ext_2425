@@ -5,13 +5,13 @@ namespace TrainSimulationApp
 {
     public class Station
     {
-        public string Name { get; set; }
+
         public List<Platform> Platforms { get; set; }
         public List<Train> Trains { get; set; }
 
-        public Station(string name, int numberOfPlatforms)
+        public Station(int numberOfPlatforms)
         {
-            this.Name = name;
+
             Platforms = new List<Platform>();
             Trains = new List<Train>();
 
@@ -36,33 +36,43 @@ namespace TrainSimulationApp
                 {
                     platform.AssignTrainToPlatform(train);
                     train.Status = TrainStatus.Docking;
+                    platform.DockingTicksRemaining = 2;
                     return true;
                 }
             }
+            train.Status = TrainStatus.Waiting;
             return false;
         }
 
         public void AdvanceTick()
         {
-
-            foreach (var train in Trains)    //reduce arrival time 
+           
+            foreach (var train in Trains)  //advance arrival time of trains
             {
-                train.AdvanceTick();
+                if (train.Status == TrainStatus.OnRoute)
+                    train.AdvanceTick();
             }
 
-            foreach (var train in Trains.Where(t => t.Status == TrainStatus.OnRoute && t.ArrivalTime == 0)) //try to assign
-                {
-                    bool ok = AssignTrainToPlatform(train);
-                    if (!ok) train.Status = TrainStatus.Waiting;
-                }
-            foreach (var platform in Platforms.Where(p => p.IsOccupied)) //manage docking in platforms
+            foreach (var train in Trains) //try to assign at income
             {
-                if (platform.DockingTicksRemaining > 0)
+                if (train.Status == TrainStatus.OnRoute && train.ArrivalTime == 0)
+                {
+                    bool assigned = AssignTrainToPlatform(train);
+                    if (!assigned)
+                        train.Status = TrainStatus.Waiting;
+                }
+            }
+
+            foreach (var platform in Platforms) //Manage docking in platforms
+            {
+                if (platform.IsOccupied && platform.DockingTicksRemaining > 0)
                 {
                     platform.DockingTicksRemaining--;
-                    platform.CurrentTrain!.Status = TrainStatus.Docking;
-                    if (platform.DockingTicksRemaining == 0)
+
+                    if (platform.DockingTicksRemaining == 0 && platform.CurrentTrain != null)
+                    {
                         platform.CurrentTrain.Status = TrainStatus.Docked;
+                    }
                 }
             }
         }
@@ -100,34 +110,40 @@ namespace TrainSimulationApp
             }
         }
 
-        public void StartSimulation()
+ public void StartSimulation()
         {
+            Console.WriteLine("\n--- Simulation Start ---");
             int tick = 0;
+            bool allDocked;
 
-            Console.WriteLine("\n------Simulation started------");
-
-            foreach (var train in Trains)
+            do
             {
-                train.Status = TrainStatus.OnRoute;
-            }
-
-            while (Trains.Any(t => t.Status != TrainStatus.Docked))
-            {
-                Console.WriteLine($"\n>>> Tick {tick}");
-
+                Console.WriteLine($"\n --> Tick {tick}");
                 AdvanceTick();
-                ReleaseArrivedTrains();
                 DisplayStatus();
 
-                Console.WriteLine("Press Enter to continue to the next tick...");
-                Console.ReadLine();
-                tick++;
-            }
+                allDocked = true;
+                
+                foreach (var train in Trains)
+                {
+                    if (train.Status != TrainStatus.Docked)
+                    {
+                        allDocked = false;
+                        break;
+                    }
+                }
 
-            Console.WriteLine(" --------------------------------------");
-            Console.WriteLine("\n ----All trains have been docked-----");
-            Console.WriteLine("\n --------SIMULATION COMPLETED--------");
-            Console.WriteLine(" --------------------------------------");
+                if (!allDocked)
+                {
+                    Console.WriteLine("Press Enter to continue...");
+                    Console.ReadLine();
+                }
+
+                tick++;
+
+            } while (!allDocked);
+
+            Console.WriteLine("\n--- Simulation Completed: All trains docked ---");
         }
     }
 }
